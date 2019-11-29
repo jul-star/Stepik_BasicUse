@@ -1,0 +1,166 @@
+2
+A : C B
+B : D E
+1
+E A
+
+1
+A
+1
+A A
+
+
+G : F
+A
+B : A
+C : A
+D : B C
+E : D
+F : D
+X
+Y : X A
+Z : X
+V : Z Y
+W : V
+9
+A G
+A Z
+A W
+X W
+X QWE
+A X
+X X
+1 1
+W
+
+10
+classA : classB classC classD classG classH
+classB : classC classE classG classH classK classL
+classC : classE classD classH classK classL
+classE : classD classF classK classL
+classD : classG classH
+classF : classK
+classG : classF
+classH : classL
+classK : classH classL
+classL
+38
+classK classD
+classD classA
+classG classD
+classH classA
+classE classE
+classH classG
+classE classL
+classB classD
+classD classL
+classD classG
+classD classE
+classA classF
+classA classC
+classK classA
+classA classH
+classK classD
+classH classB
+classK classB
+classD classL
+classG classG
+classA classH
+classK classL
+classG classE
+classB classA
+classC classK
+classK classL
+classC classL
+classG classC
+classD classD
+classC classG
+classE classA
+classF classK
+classB classG
+classH classL
+classL classF
+classH classG
+classD classA
+classH classL
+
+11
+Obj
+A : Obj
+B : Obj
+C : Obj
+F : A
+K : A B
+Z : B
+G : C
+L : F K
+N : G
+P : L Z N
+13
+A K
+A A
+Obj B
+B P
+N G
+G L
+Z P
+P Z
+Obj k
+K B
+K C
+G Z
+N P
+
+результат:
+
+Yes
+Yes
+Yes
+Yes
+No
+No
+Yes
+No
+No
+No
+No
+No
+Yes
+еще тест
+
+12
+
+G : F
+A
+B : A
+C : A
+D : B C
+E : D
+F : D
+X
+Y : X A
+Z : X
+V : Z Y
+W : V
+9
+A G
+A Z
+A W
+X W
+X QWE
+A X
+X X
+1 1
+W
+
+результат:
+
+Yes
+No
+Yes
+Yes
+No
+No
+Yes
+No
+Yes
