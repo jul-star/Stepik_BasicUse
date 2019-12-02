@@ -6,7 +6,7 @@ Note that the test methods ran in alphabetical order, irrespective of the order 
 test methods in the code
 """
 
-class MyTestCase(unittest.TestCase):
+class TestCase01(unittest.TestCase):
     def test_003(self):
         self.assertEqual(True, True)
         print("Run : ", inspect.stack()[0][3])
@@ -26,5 +26,5 @@ class MyTestCase(unittest.TestCase):
 """ 
     you can control VERBOSITY (0->2) from the code:
 """
-if __name__ == '__main__':
-    unittest.main(verbosity=2)
+# if __name__ == '__main__':
+#     unittest.main(verbosity=2)

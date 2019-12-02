@@ -28,5 +28,5 @@ class TestClass05(unittest.TestCase):
         print("\nClassname : " + self.__class__.__name__)
         print("Running Test Method : " + inspect.stack()[0][3])
 
-if __name__ == '__main__':
-    unittest.main(verbosity=0)
+# if __name__ == '__main__':
+#     unittest.main(verbosity=0)
