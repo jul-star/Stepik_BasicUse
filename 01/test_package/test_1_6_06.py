@@ -1,7 +1,7 @@
 import unittest
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
+class TestCase_1_6_06(unittest.TestCase):
+    def test_case_01(self):
+        self.fail()
 
