@@ -23,7 +23,7 @@ class Connection:
     """
     @staticmethod
     def _BuildInheritance(Inheritance):
-        inh = []
+        inh = {}
         for lst in Inheritance:
             j = 0
             for c in lst:
@@ -38,20 +38,20 @@ class Connection:
     def _BuildRequest(Request):
         req = {}
         for child, parent in Request:
-            if child not in req.keys():
-                req[child] = []
-            req[child].append(parent)
+            req[child]=parent
+
         return req
 
     def _find_inheritance(self):
+        res = []
         for parent, child in self.req.items():
             self._check_parent(parent, child)
             if self.find:
-                print("Yes")
+                res.append(True)
                 self.find = False
             else:
-                print("No")
-        return
+                res.append(False)
+        return res
 
     def _check_parent(self, parent, child):
         if child in self.inh.keys():
@@ -66,17 +66,23 @@ class Connection:
             return False
         return False
 
-    def FindConnections(self, Inheritance, Request):
-
+    def FindConnection(self, Inheritance, Request):
         self.inh = Connection._BuildInheritance(Inheritance)
         self.req = Connection._BuildRequest(Request)
         print("Inheritance: ", self.inh)
         print("Requests: ", self.req)
-        self._find_inheritance()
+
+        return self._find_inheritance()
 
     def Find(self):
         Inheritance = Connection.ReadInheritance()
         Request = Connection.ReadRequest()
-        self.FindConnections(Inheritance, Request)
+        res = self.FindConnection(Inheritance, Request)
+        for i in res:
+            if i:
+                print("Yes")
+            else:
+                print("No")
+        return
 
 
