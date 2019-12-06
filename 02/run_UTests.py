@@ -1,10 +1,7 @@
 import unittest
-
-
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
-
+# from tst_2_1_06 import *
+# from tst_2_1_09 import *
+from tst_2_2_05 import *
 
 if __name__ == '__main__':
     unittest.main()
