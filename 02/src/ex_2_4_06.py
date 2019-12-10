@@ -1,5 +1,5 @@
-import os
 import os.path
+
 res = []
 for cd, drs, fls in os.walk("sample_2_4_06"):
     # print(cd)
