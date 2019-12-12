@@ -1,7 +1,7 @@
 import doctest
 """
 Docstring code
-This is example of multiline docstring.
+This is example of multiln docstring.
 """
 def mul(a,b):
     return a*b
