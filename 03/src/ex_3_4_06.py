@@ -22,11 +22,10 @@ class Ex_3_4_06:
         :param _txt:
         :return: list of matches
         """
-        pattern = r"href=(.*?)"
+        # < a href = "https://stepic.org/media/attachments/lesson/24472/sample1.html" > 1 < / a >
+        pattern = r"href\s*=\s*\"(.*?)\""
         _fa = re.findall(pattern, _txt)
-        if _fa is not None:
-            return _fa.groups()
-        return None
+        return _fa
 
     @staticmethod
     def LinkIsOnPage(_lnk, _txt):
@@ -36,28 +35,36 @@ class Ex_3_4_06:
         :param _txt:
         :return: link is found in text
         """
-        pattern = r"{0}".format(_lnk)
-        _match = re.match(pattern, _txt)
-        if _match is not None:
+        pattern = _lnk
+        _match = re.search(pattern, _txt)
+        if _match:
             return True
         else:
             return False
 
     @staticmethod
     def getInput():
-        url1 = input()
-        url1 = url1.rstrip()
-        url2 = input()
-        url2 = url2.rstrip()
-        return [url1, url2]
+        _url1 = input()
+        _url1 = _url1.rstrip()
+        _url2 = input()
+        _url2 = _url2.rstrip()
+        return [_url1, _url2]
 
+    @staticmethod
+    def twoSteps():
+        (url1, url2) = Ex_3_4_06.getInput()
+        page1Content = Ex_3_4_06.getPageContent(url1)
+        hrefs1 = Ex_3_4_06.getListOfLinks(page1Content)
+        for href in hrefs1:
+            pageContent = Ex_3_4_06.getPageContent(href)
+            if pageContent:
+                if Ex_3_4_06.LinkIsOnPage(url2, pageContent):
+                    return True
+        return False
 
 if __name__ == "__main__":
-    url1, url2 = Ex_3_4_06.getInput()
-    page1Content = Ex_3_4_06.getPageContent(url1)
-    hrefs1 = Ex_3_4_06.getListOfLinks(page1Content)
-    for href in hrefs1:
-        pageContent = Ex_3_4_06.getPageContent(href)
-        if Ex_3_4_06.LinkIsOnPage(url2, pageContent):
-            print('Yes')
-    print('False')
+    found = Ex_3_4_06.twoSteps()
+    if found:
+        print('Yes')
+    else:
+        print('False')
