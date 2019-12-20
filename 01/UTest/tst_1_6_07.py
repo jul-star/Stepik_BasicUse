@@ -1,5 +1,5 @@
 import unittest
-from ex1_6_06 import *
+from ex_1_6_07 import *
 
 class TestCase_1_6_06(unittest.TestCase):
     def Check(self, Inheritance, Request, Expected):
