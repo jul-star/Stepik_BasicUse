@@ -2,7 +2,10 @@ class Connection:
     find = False
 
     @staticmethod
-    def ReadInput():
+    def ReadInput() -> list:
+        """
+        :return: list of strings
+        """
         n = int(input())
         lst = []
         for i in range(n):
@@ -26,11 +29,17 @@ class Connection:
 
     @staticmethod
     def getRequest(_raw: list) -> list:
+        """
+        _raw
+        :param _raw:
+        :return:
+        """
         return _raw
 
     @staticmethod
     def BuildInheritance(inheritance: list) -> dict:
         inh = {}
+        child: str = str()
         for lst in inheritance:
             j = 0
             for c in lst:
@@ -44,11 +53,12 @@ class Connection:
 
     @staticmethod
     def BuildRequest(request: list) -> list:
-        req = []
-        for ln in request:
-            for parent, child in ln:
-                req.append([parent, child])
-        return req
+        return request
+        # req = []
+        # for ln in request:
+        #     parent, child = ln.split()
+        #     req.append([parent, child])
+        # return req
 
     @staticmethod
     def FindInheritance(_inheritance: dict, requests: list) -> list:
@@ -62,7 +72,6 @@ class Connection:
             else:
                 res.append(False)
         return res
-
 
     @staticmethod
     def _check_parent(_inheritance: dict, parent, child):
@@ -81,20 +90,19 @@ class Connection:
             return False
         return False
 
-
     @staticmethod
-    def FindConnection():
+    def FindConnection() -> list:
         _tmp = Connection.ReadInput()
         _raw_inh = Connection.getInheritance(_tmp)
         _tmp = Connection.ReadInput()
         _raw_req = Connection.getRequest(_tmp)
         _inheritance = Connection.BuildInheritance(_raw_inh)
         _requests = Connection.BuildRequest(_raw_req)
-        _res = Connection.FindInheritance(_inheritance, _requests)
-        Connection.printResult(_res)
+        _result = Connection.FindInheritance(_inheritance, _requests)
+        return _result
 
-
-    def printResult(self, res):
+    @staticmethod
+    def printResult(res):
         for i in res:
             if i:
                 print("Yes")
@@ -102,6 +110,6 @@ class Connection:
                 print("No")
 
 
-
 if __name__ == "__main__":
-    Connection.FindConnection()
+    _res = Connection.FindConnection()
+    Connection.printResult(_res)

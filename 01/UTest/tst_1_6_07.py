@@ -50,32 +50,33 @@ class TestCase_1_6_06(unittest.TestCase):
         self.assertDictEqual(_Actual, _Expected)
 
     def test_getRequest_1(self):
-        _raw = [['E' 'A']]
+        _raw = [['E', 'A']]
         _Actual = Connection.getRequest(_raw)
-        _Expected = [['E' 'A']]
+        _Expected = [['E', 'A']]
         self.assertListEqual(_Actual, _Expected)
 
     def test_getRequest_2(self):
-        _raw = [['E', 'A'], ['B' ,'A'], ['C' ,'A'], ['D', 'A']]
+        _raw = [['E', 'A'], ['B', 'A'], ['C', 'A'], ['D', 'A']]
         _Actual = Connection.getRequest(_raw)
-        _Expected = [['E' 'A'], ['B' 'A'], ['C' 'A'], ['D' 'A']]
+        _Expected = [['E', 'A'], ['B', 'A'], ['C', 'A'], ['D', 'A']]
         self.assertListEqual(_Actual, _Expected)
 
     def test_BuildRequest_1(self):
-        _raw = [['E' 'A']]
+        _raw = [['E', 'A']]
         _Actual = Connection.BuildRequest(_raw)
         _Expected = [['E', 'A']]
-        self.assertDictEqual(_Actual, _Expected)
+        self.assertListEqual(_Actual, _Expected)
 
     def test_BuildRequest_2(self):
-        _raw = [['E' 'A'], ['B' 'A'], ['C' 'A'], ['D' 'A']]
+        _raw = [['E', 'A'], ['B', 'A'], ['C', 'A'], ['D', 'A']]
         _Actual = Connection.BuildRequest(_raw)
         _Expected = [['E', 'A'], ['B', 'A'], ['C', 'A'], ['D', 'A']]
-        self.assertDictEqual(_Actual, _Expected)
+        self.assertListEqual(_Actual, _Expected)
 
     def Check(self, inheritance: dict, requests: list, expected: list) -> None:
         """
         Helper Function
+        :param inheritance:
         :param Inheritance: B is a child of A
         :param Request:  Is A parent of B?
         :param Expected: True/False
@@ -105,7 +106,9 @@ class TestCase_1_6_06(unittest.TestCase):
     def test_case_04(self):
         Inheritance = {  # список введённых строк
             'G': ['F'],
-            # сначала отнаследуем от F, потом его объявим, корректный алгоритм все равно правильно обойдёт граф, независимо что было раньше: наследование или объявление
+            # сначала отнаследуем от F, потом его объявим, корректный алгоритм
+            # все равно правильно обойдёт граф, независимо что было раньше:
+            # наследование или объявление
             'A': [],
             'B': ['A'],
             'C': ['A'],
@@ -115,7 +118,8 @@ class TestCase_1_6_06(unittest.TestCase):
             # а теперь другая ветка наследования
             'X': [],
             'Y': ['X', 'A'],
-            # свяжем две ветки наследования для проверки, обошла ли рекурсия предков Z и предков Y в поисках A
+            # свяжем две ветки наследования для проверки,
+            # обошла ли рекурсия предков Z и предков Y в поисках A
             'Z': ['X'],
             'V': ['Z', 'Y'],
             'W': ['V']
@@ -134,6 +138,15 @@ class TestCase_1_6_06(unittest.TestCase):
 
         Expected = [True, False, True, True, False, False, True, False]
         self.Check(Inheritance, Requests, Expected)
+
+    def test_case_FindConnection_1(self):
+        _user_input = [4, 'A', 'B : A', 'C : A', 'D : B C',
+                       4, 'A B', 'B D', 'C D', 'D A']
+        _Actual = []
+        _Expected = [True, True, True, False]
+        with patch('builtins.input', side_effect=_user_input):
+            _Actual = Connection.FindConnection()
+        self.assertListEqual(_Actual, _Expected)
 
 
 if __name__ == '__main__':
