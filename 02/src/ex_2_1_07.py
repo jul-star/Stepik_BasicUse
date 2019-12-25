@@ -77,9 +77,10 @@ class Exceptions:
         if _len > 0:
             _res[catches[0]] = False
         for forward in range(_len):
-            if catches[forward] in _res.keys() and catches[forward]:
-                continue
             for backward in range(forward):
+                if catches[forward] == catches[backward]:
+                    _res[catches[forward]] = True
+                    break
                 if Exceptions.InConnection(catches[forward], catches[backward], inh):
                     _res[catches[forward]] = True
                     break
@@ -90,11 +91,16 @@ class Exceptions:
     @staticmethod
     def InConnection(catch: str, above: str, inh: dict) -> bool:
         _res: bool = False
+        if catch == above:
+            return True
         if catch in inh.keys():
             if above in inh[catch]:
-                _res = True
-        else:
-            _res = False
+                return True
+            else:
+                for catch_candidate in inh[catch]:
+                    if Exceptions.InConnection(catch_candidate, above, inh):
+                        return True
+
         return _res
 
     @staticmethod
